@@ -14,11 +14,12 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var Vehicle = /** @class */ (function () {
-    function Vehicle(_make, _model, _year, _rented) {
-        this._make = _make;
-        this._model = _model;
-        this._year = _year;
-        this._rented = _rented;
+    function Vehicle(make, model, year, rented) {
+        this._rented = false;
+        this._make = make;
+        this._model = model;
+        this._year = year;
+        this._rented = rented;
     }
     Object.defineProperty(Vehicle.prototype, "make", {
         get: function () {
@@ -46,9 +47,6 @@ var Vehicle = /** @class */ (function () {
             return this._rented;
         },
         set: function (isRented) {
-            if (!isRented) {
-                throw new Error("Vehicle must be rented");
-            }
             this._rented = isRented;
         },
         enumerable: false,
@@ -56,18 +54,20 @@ var Vehicle = /** @class */ (function () {
     });
     Vehicle.prototype.rent = function () {
         if (this.rented) {
-            throw new Error("Vehicle is already rented");
+            console.log("Sorry! ".concat(this._make, " ").concat(this._model, " is already rented."));
         }
         else {
             this.rented = true;
+            console.log("Congratulations! ".concat(this._make, " ").concat(this._model, " has been rented successfully."));
         }
     };
     Vehicle.prototype.return = function () {
         if (this.rented) {
-            throw new Error("Vehicle is already rented");
+            this.rented = false;
+            console.log("".concat(this._make, " ").concat(this._model, " has been returned."));
         }
         else {
-            this.rented = false;
+            console.log("".concat(this._make, " ").concat(this._model, " has not been rented yet."));
         }
     };
     return Vehicle;
@@ -115,11 +115,6 @@ var Motorcycle = /** @class */ (function (_super) {
     });
     return Motorcycle;
 }(Vehicle));
-var myBike = new Motorcycle("Yamaha", "YBR", 2023, false, "manual", 10, 5, 4);
-myBike.rent();
-console.log(myBike.rented);
-myBike.return();
-console.log(myBike.rented);
 var Car = /** @class */ (function (_super) {
     __extends(Car, _super);
     function Car(make, model, year, rented, _doors, _passengersCapacity, _airConditioned) {
@@ -190,3 +185,18 @@ var Truck = /** @class */ (function (_super) {
     });
     return Truck;
 }(Vehicle));
+var myBike = new Motorcycle("Yamaha", "YBR", 2023, false, "manual", 10, 5, 4);
+myBike.rent();
+console.log("isRented", myBike.rented);
+myBike.return();
+console.log("isRented", myBike.rented);
+var myCar = new Car("Tesla", "Model-X", 2023, false, 4, 5, true);
+myCar.rent();
+console.log("isRented", myCar.rented);
+myCar.return();
+console.log("isRented", myCar.rented);
+var myTruck = new Truck("Hino", "WU- 720", 2023, false, "diesel", 1000, 2);
+myTruck.rent();
+console.log("isRented", myTruck.rented);
+myTruck.return();
+console.log("isRented", myTruck.rented);
