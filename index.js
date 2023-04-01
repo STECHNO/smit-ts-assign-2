@@ -15,7 +15,6 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Vehicle = /** @class */ (function () {
     function Vehicle(make, model, year, rented) {
-        this._rented = false;
         this._make = make;
         this._model = model;
         this._year = year;
@@ -63,8 +62,9 @@ var Vehicle = /** @class */ (function () {
     };
     Vehicle.prototype.return = function () {
         if (this.rented) {
+            console.log("Confirm ".concat(this._make, " ").concat(this._model, " is on rent."));
+            console.log("Returning ".concat(this._make, " ").concat(this._model, " now..."));
             this.rented = false;
-            console.log("".concat(this._make, " ").concat(this._model, " has been returned."));
         }
         else {
             console.log("".concat(this._make, " ").concat(this._model, " has not been rented yet."));

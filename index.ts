@@ -2,7 +2,7 @@ abstract class Vehicle {
   private _make: string;
   private _model: string;
   private _year: number;
-  private _rented: boolean = false;
+  private _rented: boolean;
 
   constructor(make: string, model: string, year: number, rented: boolean) {
     this._make = make;
@@ -46,8 +46,9 @@ abstract class Vehicle {
 
   return(): void {
     if (this.rented) {
+      console.log(`Confirm ${this._make} ${this._model} is on rent.`);
+      console.log(`Returning ${this._make} ${this._model} now...`);
       this.rented = false;
-      console.log(`${this._make} ${this._model} has been returned.`);
     } else {
       console.log(`${this._make} ${this._model} has not been rented yet.`);
     }
